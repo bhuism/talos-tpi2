@@ -16,9 +16,16 @@ xz -d metal-rpi_generic-arm64.img.xz
 1) after putting cm4 in usb mode (use rpi cm4 emmc usb programming stick or use tpiv2, see: https://help.turingpi.com/hc/en-us/articles/8687165986205-Install-OS)
 1) flash talos, this works for sd card and emmc storage. Check the correct device name.
 
-```shell
-sudo dd if=metal-rpi_generic-arm64.img of=/dev/sda conv=fsync bs=4M status=progress
-```
+   ```shell
+   time sudo dd if=metal-rpi_generic-arm64.img of=/dev/sda conv=fsync bs=4M status=progress
+   311+1 records in
+   311+1 records out
+   1306525696 bytes (1,3 GB, 1,2 GiB) copied, 257,39 s, 5,1 MB/s
+
+   real	4m17,397s
+   user	0m0,001s
+   sys	0m0,005s
+   ```
 
 1) make sure tpiv4 node is no longer in device mode, should be host mode for normal operation
 1) optionally log in to bmc and connect to serial console of the node with minicom
