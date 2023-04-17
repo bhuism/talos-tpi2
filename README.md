@@ -31,16 +31,16 @@ microcom -s 115200 /dev/ttyS1
 
 ### hardwired bmc serial port connections to nodes
 
-|Node  | bmc port |
+|Node  | bmc device |
 |------|----------|
 |Node 1|/dev/ttyS2|
 |Node 2|/dev/ttyS1|
 |Node 3|/dev/ttyS4|
 |Node 4|/dev/ttyS5|
 
-### Boot all nodes
+### Boot nodes
 
-1) boot the node by powering down and up using the bmc
+1) boot all the nodes by powering down and up using the bmc
 1) optionally view disks ```talosctl -n <CM4 ipadres> disks --insecure```
 
 ## Create Cluster
