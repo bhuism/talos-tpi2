@@ -8,31 +8,35 @@ I used Talos v1.3.7
 
 1) download metal-rpi_generic-arm64.img.xz from https://github.com/siderolabs/talos/releases
 1) decrompress with:
-    ```shell
-    xz -d metal-rpi_generic-arm64.img.xz
-    ```
+
+```shell
+xz -d metal-rpi_generic-arm64.img.xz
+```
+
 1) after putting cm4 in usb mode (use rpi cm4 emmc usb programming stick or use tpiv2, see: https://help.turingpi.com/hc/en-us/articles/8687165986205-Install-OS)
 1) flash talos, this works for sd card and emmc storage. Check the correct device name.
-    ```shell
-    sudo dd if=metal-rpi_generic-arm64.img of=/dev/sda conv=fsync bs=4M status=progress
-    ```
+
+```shell
+sudo dd if=metal-rpi_generic-arm64.img of=/dev/sda conv=fsync bs=4M status=progress
+```
+
 1) make sure tpiv4 node is no longer in device mode, should be host mode for normal operation
 1) optionally log in to bmc and connect to serial console of the node with minicom
 
-    ### Minicom example for node2
-    
-    ```shell
-    microcom -s 115200 /dev/ttyS1
-    ```
+### Minicom example for node2
 
-    ### hardwired bmc serial port connections to nodes
+```shell
+microcom -s 115200 /dev/ttyS1
+```
 
-    |Node  | bmc port |
-    |------|----------|
-    |Node 1|/dev/ttyS2|
-    |Node 2|/dev/ttyS1|
-    |Node 3|/dev/ttyS4|
-    |Node 4|/dev/ttyS5|
+### hardwired bmc serial port connections to nodes
+
+|Node  | bmc port |
+|------|----------|
+|Node 1|/dev/ttyS2|
+|Node 2|/dev/ttyS1|
+|Node 3|/dev/ttyS4|
+|Node 4|/dev/ttyS5|
 
 ### Boot all nodes
 
@@ -48,31 +52,32 @@ I used Talos v1.3.7
    ```shell
    talosctl gen secrets -o secrets.yaml
    ```
-1) Generate config:
+
+1) Generate control and worker config:
+
    ```shell
    talosctl gen config --with-secrets secrets.yaml "clustername" https://VIP:6443
    ```
    
-   remember chosen virtual ip VIP
+   (remember chosen virtual ip VIP)
 
-### Edit controlplane.yaml:
+1) Edit controlplane.yaml:
    
-1) set ```controlPlane.scheduler.disabled: false```, I want control plane nodes to schedule work.
-1) add the VIP ipadress to network stanza:
+   1) set ```controlPlane.scheduler.disabled: false```, I want control plane nodes to schedule work.
+   1) add the VIP ipadress to network stanza:
 
-    I have:
-
-    ```
+      I have:
+      ```
       network:
       hostname: node1
       interfaces:
-        - interface: eth0
-          dhcp: true
-          vip:
-            ip: VIP```
-
-1) set install.disk: to /dev/mmcblk0
-1) optionally set install.wipe: true
+         - interface: eth0
+            dhcp: true
+            vip:
+            ip: VIP
+      ```
+   1) set ```install.disk:``` to ```/dev/mmcblk0```
+   1) optionally set ```install.wipe: true```
 
 ### For each node (I have 3, an uneven number of control nodes is recommended in k8s):
 
@@ -90,8 +95,15 @@ I used Talos v1.3.7
    ```
 Grab ☕
 
+### Generate kubeconfig.
+
+```shell
+talosctl kubeconfig -f -n VIP
+
+```
+
 ### Watch cluster, be happy 👏
 
-1) ```watch -n 1.5 kubectl --kubeconfig=/tmp/kubeconfig --request-timeout=1s get pods,deployment,services,nodes -A -o wide```
+1) ```watch -n 1.5 kubectl --kubeconfig=./kubeconfig --request-timeout=1s get pods,deployment,services,nodes -A -o wide```
 
 ![Cluster Overview](cluster.png)
