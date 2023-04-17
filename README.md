@@ -16,7 +16,7 @@ xz -d metal-rpi_generic-arm64.img.xz
 1) after putting cm4 in usb mode (use rpi cm4 emmc usb programming stick or use tpiv2, see: https://help.turingpi.com/hc/en-us/articles/8687165986205-Install-OS)
 1) flash talos, this works for sd card and emmc storage. Check the correct device name.
 
-   ```shell
+   ```
    time sudo dd if=metal-rpi_generic-arm64.img of=/dev/sda conv=fsync bs=4M status=progress
    311+1 records in
    311+1 records out
