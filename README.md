@@ -27,8 +27,8 @@ xz -d metal-rpi_generic-arm64.img.xz
    sys	0m0,005s
    ```
 
-1) make sure tpiv4 node is no longer in device mode, should be host mode for normal operation
-1) optionally log in to bmc and connect to serial console of the node with minicom
+1) make sure tpiv4 node is no longer in device mode, it should be host mode for normal operation.
+1) optionally log in to bmc and connect to serial console of the node with minicom.
 
 ### Minicom example for node2
 
@@ -36,7 +36,7 @@ xz -d metal-rpi_generic-arm64.img.xz
 microcom -s 115200 /dev/ttyS1
 ```
 
-### hardwired bmc serial port connections to nodes
+### Hardwired bmc serial port connections to nodes
 
 |Node  | bmc device |
 |------|----------|
@@ -81,7 +81,7 @@ microcom -s 115200 /dev/ttyS1
          - interface: eth0
             dhcp: true
             vip:
-            ip: VIP
+            ip: <VIP>
       ```
    1) set ```install.disk:``` to ```/dev/mmcblk0```
    1) optionally set ```install.wipe: true```
@@ -105,7 +105,7 @@ Grab ☕
 ### Generate kubeconfig.
 
 ```shell
-talosctl kubeconfig -f -n VIP
+talosctl kubeconfig -f -n <VIP>
 
 ```
 
@@ -114,7 +114,6 @@ talosctl kubeconfig -f -n VIP
 1) ```watch -n 1.5 kubectl --kubeconfig=./kubeconfig --request-timeout=1s get pods,deployment,services,nodes -A -o wide```
 
 ![Cluster Overview](cluster.png)
-
 
 ### TODO
 
