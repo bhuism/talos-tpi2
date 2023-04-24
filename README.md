@@ -114,3 +114,12 @@ talosctl kubeconfig -f -n VIP
 1) ```watch -n 1.5 kubectl --kubeconfig=./kubeconfig --request-timeout=1s get pods,deployment,services,nodes -A -o wide```
 
 ![Cluster Overview](cluster.png)
+
+
+### TODO
+
+* cillium
+* metallb
+* ingress-nginx
+* cert-manager
+* external-dns
