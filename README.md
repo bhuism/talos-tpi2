@@ -17,14 +17,16 @@ xz -d metal-rpi_generic-arm64.img.xz
 1) flash talos, this works for sd card and emmc storage. Check the correct device name.
 
    ```
-   time sudo dd if=metal-rpi_generic-arm64.img of=/dev/sda conv=fsync bs=4M status=progress
-   311+1 records in
-   311+1 records out
-   1306525696 bytes (1,3 GB, 1,2 GiB) copied, 257,39 s, 5,1 MB/s
+   time xz -d < metal-rpi_generic-arm64.img.xz | sudo dd of=/dev/sda bs=4M status=progress conv=fsync
+   893665280 bytes (894 MB, 852 MiB) copied, 3 s, 298 MB/s1306525696 bytes (1,3 GB, 1,2 GiB) copied, 3,82763 s, 341 MB/s
 
-   real	4m17,397s
-   user	0m0,001s
-   sys	0m0,005s
+   0+152937 records in
+   0+152937 records out
+   1306525696 bytes (1,3 GB, 1,2 GiB) copied, 99,591 s, 13,1 MB/s
+
+   real	1m39,600s
+   user	0m3,607s
+   sys	0m0,226s
    ```
 
 1) make sure tpiv4 node is no longer in device mode, it should be host mode for normal operation.
