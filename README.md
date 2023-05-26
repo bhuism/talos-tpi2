@@ -17,7 +17,7 @@ xz -d metal-rpi_generic-arm64.img.xz
 1) flash talos, this works for sd card and emmc storage. Check the correct device name.
 
    ```
-   time xz -d < metal-rpi_generic-arm64.img.xz | sudo dd of=/dev/sda bs=4M status=progress conv=fsync
+   time xz -d < metal-rpi_generic-arm64.img.xz | sudo dd of=/dev/sda bs=1M status=progress conv=fsync
    893665280 bytes (894 MB, 852 MiB) copied, 3 s, 298 MB/s1306525696 bytes (1,3 GB, 1,2 GiB) copied, 3,82763 s, 341 MB/s
 
    0+152937 records in
