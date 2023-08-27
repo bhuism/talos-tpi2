@@ -112,10 +112,3 @@ talosctl kubeconfig -f -n <VIP>
 
 ![Cluster Overview](cluster.png)
 
-### TODO
-
-* cillium
-* metallb
-* ingress-nginx
-* cert-manager
-* external-dns
