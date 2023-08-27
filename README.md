@@ -7,11 +7,6 @@ I used Talos v1.3.7
 ### Flash image to all nodes
 
 1) download metal-rpi_generic-arm64.img.xz from https://github.com/siderolabs/talos/releases
-1) decrompress with:
-
-```shell
-xz -d metal-rpi_generic-arm64.img.xz
-```
 
 1) after putting cm4 in usb mode (use rpi cm4 emmc usb programming stick or use tpiv2, see: https://help.turingpi.com/hc/en-us/articles/8687165986205-Install-OS)
 1) flash talos, this works for sd card and emmc storage. Check the correct device name.
